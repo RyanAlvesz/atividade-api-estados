@@ -171,9 +171,11 @@ const getCidades = (sigla) => {
 
 }
 
-getListaDeEstados()
-getDadosEstado('ba')
-getCapitalEstado('sp')
-getEstadosRegiao('nordeste')
-getCapitalPais()
-getCidades('rj')
+module.exports = {
+    getListaDeEstados,
+    getDadosEstado,
+    getCapitalEstado,
+    getEstadosRegiao,
+    getCapitalPais,
+    getCidades
+}
