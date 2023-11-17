@@ -32,6 +32,7 @@ const getDadosEstado = (sigla) => {
     const estados = pais.estadosCidades.estados
 
     let descricaoEstado = {}
+    let status = false
 
     estados.forEach( (estado) => {
         
@@ -41,12 +42,16 @@ const getDadosEstado = (sigla) => {
             descricaoEstado.descricao = estado.nome
             descricaoEstado.capital = estado.capital
             descricaoEstado.regiao = estado.regiao
+            status = true
 
         }
 
     })
 
-    return descricaoEstado
+    if(status)
+        return descricaoEstado
+    else
+        return false
 
 }
 
@@ -56,11 +61,13 @@ const getCapitalEstado = (sigla) => {
     const estados = pais.estadosCidades.estados
 
     let capitalEstado = {}
-
+    let status = false
+    
     estados.forEach( (estado) => {
         
         if(estado.sigla.includes(uf)){
-
+            
+            status = true
             capitalEstado.uf = estado.sigla
             capitalEstado.descricao = estado.nome
             capitalEstado.capital = estado.capital
@@ -69,8 +76,10 @@ const getCapitalEstado = (sigla) => {
 
     })
 
-    return capitalEstado
-
+    if(status)
+        return capitalEstado
+    else
+        return false
 }
 
 const getEstadosRegiao = (regiaoSelecionada) => {
@@ -80,6 +89,8 @@ const getEstadosRegiao = (regiaoSelecionada) => {
     const estados = pais.estadosCidades.estados
     
     let estadoRegiao = {}
+    let status = false
+
     estadoRegiao.regiao = regiao
 
     let estadosRegiaoSelecionada = []
@@ -93,6 +104,8 @@ const getEstadosRegiao = (regiaoSelecionada) => {
                 descricao: estado.nome,
             }
 
+            status = true
+
             estadosRegiaoSelecionada.push(estadoRegiaoSelecionada)
 
 
@@ -102,8 +115,11 @@ const getEstadosRegiao = (regiaoSelecionada) => {
 
     estadoRegiao.estados = estadosRegiaoSelecionada
 
-    return estadoRegiao
-    
+    if(status)
+        return estadoRegiao
+    else
+        return false
+        
 }
 
 const getCapitalPais = () => {
@@ -118,6 +134,7 @@ const getCapitalPais = () => {
         if(estado.capital_pais != undefined){
 
             let estadoInfo = {}
+
             
             estadoInfo.capital_atual = estado.capital_pais.capital
             estadoInfo.uf = estado.sigla
@@ -146,8 +163,7 @@ const getCidades = (sigla) => {
 
     let estadoCidades = {}
     let cidades = []
-
-    console.log(estados.estado)
+    let status = false
 
     estados.forEach( (estado) => {
 
@@ -157,6 +173,8 @@ const getCidades = (sigla) => {
             estadoCidades.descricao = estado.nome
             estadoCidades.quantidade_cidades = estado.cidades.length
     
+            let status = true
+
             estado.cidades.forEach( (cidade) => {
                 cidades.push(cidade.nome)
             })
@@ -167,7 +185,10 @@ const getCidades = (sigla) => {
 
     estadoCidades.cidades = cidades
 
-    return estadoCidades
+    if(status)
+        return estadoCidades
+    else
+        return false
 
 }
 

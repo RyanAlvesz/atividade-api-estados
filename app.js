@@ -67,17 +67,29 @@ app.get('/estados/sigla', cors(), async (request, response, next) => {
 app.get('/estado/dados/:sigla', cors(), async (request, response, next) => {
 
     let sigla = request.params.sigla
-    response.json(funcoes.getDadosEstado(sigla))
-    response.status(200)
+
+    if(funcoes.getDadosEstado(sigla)){
+        response.json(funcoes.getDadosEstado(sigla))
+        response.status(200)
+    }else{
+        response.json({erro: 'Não foi possível encontrar um item'})
+        response.status(404)
+    }
     
 })
 
 // EndPoints: Listar a capital de um estado
-app.get('/estado/capital/:sigla', cors(), async (request, response, next) => {
+app.get('/estado/capital/', cors(), async (request, response, next) => {
 
-    let sigla = request.params.sigla
-    response.json(funcoes.getCapitalEstado(sigla))
-    response.status(200)
+    let sigla = request.query.sigla
+
+    if(funcoes.getCapitalEstado(sigla)){
+        response.json(funcoes.getCapitalEstado(sigla))
+        response.status(200)
+    }else{
+        response.json({erro: 'Não foi possível encontrar um item'})
+        response.status(404)
+    }
     
 })
 
@@ -85,9 +97,15 @@ app.get('/estado/capital/:sigla', cors(), async (request, response, next) => {
 app.get('/estados/regiao/:regiao', cors(), async (request, response, next) => {
 
     let regiao = request.params.regiao
-    response.json(funcoes.getEstadosRegiao(regiao))
-    response.status(200)
     
+    if(funcoes.getEstadosRegiao(regiao)){
+        response.json(funcoes.getEstadosRegiao(regiao))
+        response.status(200)
+    }else{
+        response.json({erro: 'Não foi possível encontrar um item'})
+        response.status(404)
+    }
+
 })
 
 // EndPoints: Listar as capitais do Brasil
@@ -102,8 +120,14 @@ app.get('/capitais', cors(), async (request, response, next) => {
 app.get('/estado/cidades/:sigla', cors(), async (request, response, next) => {
 
     let sigla = request.params.sigla
-    response.json(funcoes.getCidades(sigla))
-    response.status(200)
+
+    if(funcoes.getCidades(sigla)){
+        response.json(funcoes.getCidades(sigla))
+        response.status(200)
+    }else{
+        response.json({erro: 'Não foi possível encontrar um item'})
+        response.status(404)
+    }
     
 })
 
